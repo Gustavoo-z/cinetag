@@ -1,6 +1,5 @@
+import { useVideos } from "contexts/videoContext";
 import styled from "styled-components";
-import favoriteActive from "./favorite.png";
-import favoriteInactive from "./favorite_outline.png";
 
 const Container = styled.div`
   display: flex;
@@ -21,7 +20,7 @@ const StyledCard = styled.figure`
 
 const StyledFigCaption = styled.figcaption`
   position: relative;
-  background-color: #e2e2e2;
+  background-color: var(--cinza);
   display: block;
   height: 120px;
   max-width: 100%;
@@ -36,27 +35,18 @@ const StyledFigCaption = styled.figcaption`
   }
 `;
 
-export default function Card({ filmes, setFilmes }) {
-  const filmesInicial = [...filmes][0];
-  function toggleFavorite(filme) {
-    filme.favorite = !filme.favorite;
-    setFilmes([...filmes]);
-  }
-  function verifyFavorite(favorite) {
-    favorite ? (favorite = favoriteActive) : (favorite = favoriteInactive);
-    return favorite;
-  }
-
+export default function Card({ videos }) {
+  const { toggleFavorite, verifyFavorite } = useVideos();
   return (
     <Container>
-      {filmesInicial.map((filme) => (
-        <StyledCard key={filme.id}>
-          <img src={filme.capa} alt={filme.titulo} />
+      {videos.map((video) => (
+        <StyledCard key={video.id}>
+          <img src={video.capa} alt={video.titulo} />
           <StyledFigCaption>
-            {filme.titulo}
+            {video.titulo}
             <img
-              onClick={() => toggleFavorite(filme)}
-              src={verifyFavorite(filme.favorite)}
+              onClick={() => toggleFavorite(video)}
+              src={verifyFavorite(video.favorite)}
               alt="Favorito"
             />
           </StyledFigCaption>
