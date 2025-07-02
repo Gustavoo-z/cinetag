@@ -11,7 +11,6 @@ export function verifyBanner(location) {
   }
   if (location.startsWith("/player")) {
     return bannerPlayer;
-  } else {
-    return;
   }
+  return null;
 }
