@@ -1,4 +1,5 @@
 import { useVideos } from "contexts/videoContext";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -15,6 +16,7 @@ const StyledCard = styled.figure`
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
   img {
     display: block;
+    cursor: pointer;
   }
 `;
 
@@ -41,7 +43,9 @@ export default function Card({ videos }) {
     <Container>
       {videos.map((video) => (
         <StyledCard key={video.id}>
-          <img src={video.capa} alt={video.titulo} />
+          <Link to={`/player/${video.id}`}>
+            <img src={video.capa} alt={video.titulo} />
+          </Link>
           <StyledFigCaption>
             {video.titulo}
             <img

@@ -11,6 +11,12 @@ const SectionNav = styled.nav`
   justify-content: space-around;
 `;
 
+const SectionBanner = styled.div`
+  img {
+    width: 100%;
+  }
+`;
+
 export default function Header({ banner }) {
   return (
     <>
@@ -20,9 +26,9 @@ export default function Header({ banner }) {
         </Link>
         <HeaderLink />
       </SectionNav>
-      <>
+      <SectionBanner>
         <img src={banner} alt="Banner Home" />
-      </>
+      </SectionBanner>
     </>
   );
 }

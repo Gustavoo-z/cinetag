@@ -26,6 +26,10 @@ export const VideoProvider = ({ children }) => {
     return favorite ? favoriteActive : favoriteInactive;
   };
 
+  const videoPlayer = (id) => {
+    return videos.find((v) => v.id === id);
+  };
+
   return (
     <VideoContext.Provider
       value={{
@@ -33,6 +37,7 @@ export const VideoProvider = ({ children }) => {
         favorites,
         toggleFavorite,
         verifyFavorite,
+        videoPlayer,
       }}
     >
       {children}
