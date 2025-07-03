@@ -1,13 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import favoriteActive from "../components/Card/favorite.png";
 import favoriteInactive from "../components/Card/favorite_outline.png";
-import videosInicial from "../json/db.json";
 
 const VideoContext = createContext();
 
 export const VideoProvider = ({ children }) => {
-  const [videos, setVideos] = useState(videosInicial);
+  const [videos, setVideos] = useState([]);
   const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    fetch("https://my-json-server.typicode.com/Gustavoo-z/cinetag/videos")
+      .then((response) => response.json())
+      .then((data) => setVideos(data));
+  }, []);
 
   const updateFavorites = (videosAtualizados) => {
     const filtrados = videosAtualizados.filter((v) => v.favorite);
